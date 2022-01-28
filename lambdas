@@ -1,3 +1,7 @@
+# Carlos Alberto Tellez
+# AWS API Websocket, Lambda and DynamDB Demo
+
+
 # Connect for API Gateway - log event context and return status code
 import json
 
