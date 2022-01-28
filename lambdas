@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     print("****")
     print(context)
     
-#getWords - Progra, logic to connect to AWS api and dynamo db. it uses uuid4 to get some random record for dynamodb collection
+#getWords - Program logic to connect to AWS api and dynamo db. it uses uuid4 to get some random record from dynamodb collection
 import json
 import urllib3
 import boto3
