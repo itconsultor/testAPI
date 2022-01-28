@@ -38,10 +38,12 @@ def lambda_handler(event, context):
     table = dynamodb.Table("TestCollection")
     singleItem = table.scan(Limit=1, ExclusiveStartKey={'word': str(uuid4())})
     
-    if not singleItem:
-        singleItem = table.scan(Limit=1, ExclusiveStartKey={'word': str(uuid4())})
+    if singleItem['Items']:
+        response = client.post_to_connection(ConnectionId=connectionId, Data=json.dumps(singleItem))
+    else:
+        response = client.post_to_connection(ConnectionId=connectionId, Data=json.dumps("Didn't find an item. Please try again."))
     
     #print(singleItem)
-    response = client.post_to_connection(ConnectionId=connectionId, Data=json.dumps(singleItem))
+    
     return { "statusCode": 200 }
     #return None
