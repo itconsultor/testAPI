@@ -1,0 +1,43 @@
+# Connect for API Gateway - log event context and return status code
+import json
+
+def lambda_handler(event, context):
+    # TODO implement
+    print(event)
+    print("****")
+    print(context)
+    return {"statusCode": 200 }
+    
+# Disconnect - log event and context
+import json
+
+def lambda_handler(event, context):
+    print(event)
+    print("****")
+    print(context)
+    
+#getWords - Progra, logic to connect to AWS api and dynamo db. it uses uuid4 to get some random record for dynamodb collection
+import json
+import urllib3
+import boto3
+from uuid import uuid4
+
+client = boto3.client('apigatewaymanagementapi', endpoint_url="https://x01m0bei28.execute-api.us-east-1.amazonaws.com/production")
+dynamodb = boto3.resource("dynamodb")
+
+def lambda_handler(event, context):
+    
+    print(event)
+    
+    connectionId = event["requestContext"]["connectionId"]
+    
+    table = dynamodb.Table("TestCollection")
+    singleItem = table.scan(Limit=1, ExclusiveStartKey={'word': str(uuid4())})
+    
+    if not singleItem:
+        singleItem = table.scan(Limit=1, ExclusiveStartKey={'word': str(uuid4())})
+    
+    #print(singleItem)
+    response = client.post_to_connection(ConnectionId=connectionId, Data=json.dumps(singleItem))
+    return { "statusCode": 200 }
+    #return None
