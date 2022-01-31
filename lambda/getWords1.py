@@ -3,7 +3,9 @@ import urllib3
 import boto3
 from uuid import uuid4
 
-client = boto3.client('apigatewaymanagementapi', endpoint_url="https://x01m0bei28.execute-api.us-east-1.amazonaws.com/production")
+
+endPoint = 'https://' + events['headers']['Host'] + '/' + events['requestContext']['stage'] + events['path']
+client = boto3.client('apigatewaymanagementapi', endpoint_url=endPoint)
 dynamodb = boto3.resource("dynamodb")
 
 def lambda_handler(event, context):
