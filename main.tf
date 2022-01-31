@@ -55,7 +55,7 @@ resource "aws_iam_role" "lambda-iam" {
 }
 
 resource "aws_lambda_function" "Connect1" {
-    filename = "Connect1.zip"
+    filename = "lambda.zip"
     function_name = "Connect1"
     role = aws_iam_role.lambda-iam.arn
     handler = "lambda.lambda_handler"
@@ -64,7 +64,7 @@ resource "aws_lambda_function" "Connect1" {
 }
 
 resource "aws_lambda_function" "Disconnect1" {
-    filename = "Disconnect1.zip"
+    filename = "lambda.zip"
     function_name = "Disconnect1"
     role = aws_iam_role.lambda-iam.arn
     handler = "lambda.lambda_handler"
@@ -73,7 +73,7 @@ resource "aws_lambda_function" "Disconnect1" {
 }
 
 resource "aws_lambda_function" "getWords1" {
-    filename = "getWords1.zip"
+    filename = "lambda.zip"
     function_name = "getWords1"
     role = aws_iam_role.lambda-iam.arn
     handler = "lambda.lambda_handler"
